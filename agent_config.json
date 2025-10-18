@@ -1,0 +1,27 @@
+{
+  "controller_url": "http://localhost:8000/agent",
+  "region": "us-east-1",
+  "db": "api_monitor.db",
+  "request_timeout": 10,
+  "poll_interval_seconds": 30,
+  "endpoints": [
+    {
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "userId": {"type": "integer"},
+            "id": {"type": "integer"},
+            "title": {"type": "string"},
+            "body": {"type": "string"}
+          },
+          "required": ["userId", "id", "title", "body"]
+        }
+      },
+      "sla_codes": [200],
+      "interval_seconds": 30
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "db": "api_monitor.db",
+  "agent_registry": "agents.json",
+  "poll_interval_seconds": 30,
+  "request_timeout": 10,
+  "concurrency": 8,
+  "predict_window_minutes": 60,
+  "alert_recent_minutes": 30,
+  "alert_threshold_upper_ms": 500,
+  "z_thresh": 3.0,
+  "auto_heal": {
+    "enabled": false,
+    "action": {
+      "type": "shell",
+      "cmd": "echo 'Healing action executed'"
+    }
+  },
+  "alert": {
+    "slack_webhook": "",
+    "smtp": {
+      "host": "smtp.example.com",
+      "port": 587,
+      "from_addr": "monitor@example.com",
+      "to_addrs": ["admin@example.com"],
+      "username": "smtp_user",
+      "password": "smtp_pass"
+    },
+    "telegram": {
+      "bot_token": "",
+      "chat_id": ""
+    },
+    "twilio": {
+      "account_sid": "",
+      "auth_token": "",
+      "from_phone": "+1234567890",
+      "to_phone": "+0987654321"
+    }
+  },
+  "endpoints": [
+    {
+      "url": "https://jsonplaceholder.typicode.com/posts",
+      "region": "us-east-1",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "userId": {"type": "integer"},
+            "id": {"type": "integer"},
+            "title": {"type": "string"},
+            "body": {"type": "string"}
+          },
+          "required": ["userId", "id", "title", "body"]
+        }
+      },
+      "sla_codes": [200],
+      "interval_seconds": 30
+    }
+  ]
+}
